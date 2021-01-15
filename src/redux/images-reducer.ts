@@ -10,8 +10,7 @@ const initialState = {
   imgInfo: {} as PhotoDescriptionType
 }
 
-
-export const imagesReducer = (state: typeof initialState, action: ActionTypes) => {
+export const imagesReducer = (state = initialState, action: ActionTypes) => {
   switch (action.type) {
     case SET_IMAGES:
       return {

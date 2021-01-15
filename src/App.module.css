@@ -1,5 +1,9 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 .mainHeader {
-
+  font-family: 'Roboto Condensed', sans-serif;;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 42px;
 }

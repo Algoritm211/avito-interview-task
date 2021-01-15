@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1 className={classes.mainHeader}>Task app</h1>
+        <h1 className={classes.mainHeader}>Test app</h1>
       </header>
       <section>
         Hello
