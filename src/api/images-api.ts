@@ -9,10 +9,10 @@ export const instanceAxios = axios.create({
 export const ImagesAPI = {
   async getImages() {
     const images = await instanceAxios.get<Array<ImageType>>('')
-    return images
+    return images.data
   },
   async getPhotoDescription(id: number) {
     const photoDescr = await instanceAxios.get<PhotoDescriptionType>('id').then(data => data)
-    return photoDescr
+    return photoDescr.data
   }
 }

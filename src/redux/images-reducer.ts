@@ -1,5 +1,6 @@
 import {ImageType, PhotoDescriptionType} from "../types/types";
 import {BaseThunkType, InferActionsType} from "./redux-store";
+import {ImagesAPI} from "../api/images-api";
 
 
 const SET_IMAGES = 'frontend-interview-task/image-reducer/SET_IMAGES'
@@ -30,6 +31,12 @@ export const actions = {
       images
     } as const
   }
+}
+
+
+export const loadImages = (): ThunkType => async (dispatch) => {
+  const images = await ImagesAPI.getImages()
+  dispatch(actions.setImages(images))
 }
 
 type ActionTypes = InferActionsType<typeof actions>

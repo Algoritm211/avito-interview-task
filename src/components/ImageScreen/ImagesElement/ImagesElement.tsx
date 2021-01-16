@@ -8,8 +8,6 @@ type Props = {
 export const ImageElement: React.FC<Props> = (props) => {
 
   return (
-    <div className={classes.image}>
-      <img src={props.imageUrl} alt={'GalleryPhoto'}/>
-    </div>
+    <img src={props.imageUrl} alt={'GalleryPhoto'} className={classes.image}/>
   )
 }

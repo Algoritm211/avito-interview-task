@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './App.module.css';
+import ImageScreen from "./components/ImageScreen/ImageScreen";
+import ModalWindow from "./components/ModalWindow/ModalWindow";
 
 function App() {
   return (
@@ -8,7 +10,7 @@ function App() {
         <h1 className={classes.mainHeader}>Test app</h1>
       </header>
       <section>
-        Hello
+        <ImageScreen />
       </section>
     </div>
   );
