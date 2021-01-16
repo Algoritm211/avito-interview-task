@@ -7,10 +7,14 @@
   width: 100%;
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+}
+
+.modalWindowContainer.open {
+  display: flex;
 }
 
 .modalWindow {
@@ -58,7 +62,6 @@
 .commentButton:active {
   background: #30668d;
 }
-
 
 /*comment block*/
 

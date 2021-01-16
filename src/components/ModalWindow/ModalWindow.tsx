@@ -1,6 +1,8 @@
 import {FieldProps, useFormik} from 'formik';
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import classes from './ModalWindow.module.css'
+import classNames from 'classnames'
+import {useHistory, useParams} from "react-router-dom";
 
 
 type CommentType = {
@@ -8,8 +10,22 @@ type CommentType = {
   comment: string
 }
 
-const ModalWindow: React.FC = () => {
-//"https://picsum.photos/id/237/600/400"
+
+const ModalWindow: React.FC = (props) => {
+
+  const { id } = useParams<{id: string | undefined}>()
+  const history = useHistory()
+  const backdrop = useRef<HTMLDivElement | null>(null);
+
+  const onClose = () => {
+    if (id) {
+      history.push({
+        pathname: '/images/'
+      })
+    }
+  }
+
+  useOutsideClick(backdrop as React.MutableRefObject<HTMLDivElement>, onClose);
 
   const formik = useFormik({
     initialValues: {
@@ -22,8 +38,8 @@ const ModalWindow: React.FC = () => {
   });
 
   return (
-    <div className={classes.modalWindowContainer}>
-      <div className={classes.modalWindow}>
+    <div className={classNames(classes.modalWindowContainer, {[classes.open]: id}) }>
+      <div className={classes.modalWindow} ref={backdrop}>
         <div className={classes.photoInputs}>
           <div>
             <img src={"https://picsum.photos/id/237/600/400"} alt={'landscape'} className={classes.imageModal}/>
@@ -74,5 +90,20 @@ const ModalWindow: React.FC = () => {
     </div>
   )
 }
+
+const useOutsideClick = (ref: React.MutableRefObject<HTMLDivElement>, callback: () => void) => {
+  const handleClick = (e: MouseEvent) => {
+    if (ref.current && !ref.current.contains(e.target as Node)) {
+      callback();
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  });
+};
 
 export default ModalWindow
