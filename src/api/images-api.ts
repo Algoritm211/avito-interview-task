@@ -11,8 +11,12 @@ export const ImagesAPI = {
     const images = await instanceAxios.get<Array<ImageType>>('')
     return images.data
   },
-  async getPhotoDescription(id: number) {
-    const photoDescr = await instanceAxios.get<PhotoDescriptionType>('id').then(data => data)
+  async getPhotoDescription(id: string) {
+    const photoDescr = await instanceAxios.get<PhotoDescriptionType>(id).then(data => data)
     return photoDescr.data
+  },
+  async commentImage(id: string) {
+    const response = await instanceAxios.post(`${id}/comments`).then(data => data)
+    return response.data
   }
 }

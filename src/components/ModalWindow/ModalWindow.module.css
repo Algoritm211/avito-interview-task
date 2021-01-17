@@ -11,6 +11,7 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .modalWindowContainer.open {
@@ -24,8 +25,16 @@
   border-radius: 5px;
   padding: 30px;
   display: flex;
+  position: relative;
 }
 
+.closeModal {
+  position: absolute;
+  top: 19px;
+  right: 22px;
+  cursor: pointer;
+  font-size: 25px;
+}
 .imageModal {
   width: 331px;
   height: 205px;

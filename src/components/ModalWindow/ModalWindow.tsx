@@ -1,21 +1,41 @@
-import {FieldProps, useFormik} from 'formik';
+import {useFormik} from 'formik';
 import React, {useEffect, useRef} from 'react'
 import classes from './ModalWindow.module.css'
 import classNames from 'classnames'
 import {useHistory, useParams} from "react-router-dom";
+import {useOutsideClick} from '../common/UseOutsideClick';
+import {useDispatch, useSelector} from "react-redux";
+import {actions, commentImage, loadImageInfo} from '../../redux/images-reducer';
+import {getComments, getLargeImage} from '../../redux/image-selector';
+import {CommentType} from '../../types/types';
+import {convert} from '../common/TimeDataHelp';
 
 
-type CommentType = {
+type CommentFormType = {
   firstName: string,
   comment: string
 }
 
+type PropsModal = {
+  setIsOpenModal: (isOpen: boolean) => void
+}
 
-const ModalWindow: React.FC = (props) => {
 
-  const { id } = useParams<{id: string | undefined}>()
+const ModalWindow: React.FC<PropsModal> = (props) => {
+
+
+  const dispatch = useDispatch()
+  const comments = useSelector(getComments)
+  let photo = useSelector(getLargeImage)
+  const {id} = useParams<{ id: string | undefined }>()
   const history = useHistory()
   const backdrop = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(loadImageInfo(id))
+    }
+  }, [id])
 
   const onClose = () => {
     if (id) {
@@ -23,6 +43,8 @@ const ModalWindow: React.FC = (props) => {
         pathname: '/images/'
       })
     }
+    props.setIsOpenModal(false)
+    dispatch(actions.removeImageData())
   }
 
   useOutsideClick(backdrop as React.MutableRefObject<HTMLDivElement>, onClose);
@@ -31,18 +53,26 @@ const ModalWindow: React.FC = (props) => {
     initialValues: {
       firstName: '',
       comment: ''
-    } as CommentType,
-    onSubmit: (values: CommentType) => {
-      alert(JSON.stringify(values, null, 2));
+    } as CommentFormType,
+    onSubmit: (values: CommentFormType) => {
+      //alert(JSON.stringify(values, null, 2));
+
+      if (id) {
+        dispatch(commentImage(id))
+      }
     },
   });
 
+  const commentBlock = comments?.map((comment) => {
+    return <Comment comment={comment}/>
+  })
+
   return (
-    <div className={classNames(classes.modalWindowContainer, {[classes.open]: id}) }>
+    <div className={classNames(classes.modalWindowContainer, {[classes.open]: id})}>
       <div className={classes.modalWindow} ref={backdrop}>
         <div className={classes.photoInputs}>
           <div>
-            <img src={"https://picsum.photos/id/237/600/400"} alt={'landscape'} className={classes.imageModal}/>
+            {photo && <img src={photo} alt={'largeIMG'} className={classes.imageModal}/>}
           </div>
           <div className={classes.commentFormBlock}>
             <form onSubmit={formik.handleSubmit} className={classes.commentForm}>
@@ -77,33 +107,35 @@ const ModalWindow: React.FC = (props) => {
           </div>
         </div>
         <div className={classes.commentBlock}>
-          <div className={classes.comment}>
-            <div className={classes.dateComment}>
-              29.29.29
-            </div>
-            <div className={classes.commentText}>
-              Тут должен быть комментарий
-            </div>
-          </div>
+          {commentBlock}
+        </div>
+        <div className={classes.closeModal} onClick={onClose}>
+          <i className="fas fa-times"></i>
         </div>
       </div>
     </div>
   )
 }
 
-const useOutsideClick = (ref: React.MutableRefObject<HTMLDivElement>, callback: () => void) => {
-  const handleClick = (e: MouseEvent) => {
-    if (ref.current && !ref.current.contains(e.target as Node)) {
-      callback();
-    }
-  };
-  useEffect(() => {
-    document.addEventListener("click", handleClick);
 
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  });
-};
+type Props = {
+  comment: CommentType
+}
+
+const Comment: React.FC<Props> = (props) => {
+
+  const date = convert(props.comment.date)
+
+  return (
+    <div className={classes.comment}>
+      <div className={classes.dateComment}>
+        {date}
+      </div>
+      <div className={classes.commentText}>
+        {props.comment.text}
+      </div>
+    </div>
+  )
+}
 
 export default ModalWindow

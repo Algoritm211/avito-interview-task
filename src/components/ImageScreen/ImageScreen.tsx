@@ -11,7 +11,7 @@ import {ImageType} from "../../types/types";
 const ImageScreen: React.FC = () => {
 
   const [isOpenModalWindow, setIsOpenModalWindow] = useState(false)
-
+  
   let history = useHistory();
 
   const onOpenModal = (id: number) => {
@@ -38,7 +38,7 @@ const ImageScreen: React.FC = () => {
   return (
       <div className={classes.photoContainer}>
         {imagesComponent}
-        <ModalWindow />
+        {isOpenModalWindow && <ModalWindow setIsOpenModal={setIsOpenModalWindow} />}
       </div>
   )
 }
