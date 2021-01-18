@@ -18,6 +18,9 @@ function App() {
           <Redirect from={'/'} to={'/images/'}/>
         </Switch>
       </section>
+      <div className={classes.footer}>
+        @ 2019 - 2020
+      </div>
     </div>
   );
 }

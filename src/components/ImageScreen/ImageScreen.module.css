@@ -1,7 +1,20 @@
 
 
-.photoContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+
+@media (min-width: 700px) {
+  .photoContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+
+@media (min-width: 320px) and (max-width: 700px){
+  .photoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

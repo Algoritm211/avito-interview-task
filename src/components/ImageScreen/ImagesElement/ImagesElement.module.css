@@ -1,7 +1,21 @@
 
-.image {
-  width: 229px;
-  height: 142px;
-  margin: 15px 10px;
-  cursor: pointer;
+
+@media (min-width: 700px) {
+  .image {
+    width: 229px;
+    height: 142px;
+    margin: 15px 10px;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 700px) {
+  .image {
+    display: block;
+    width: 280px;
+    height: 171px;
+    margin: 15px 20px;
+    cursor: pointer;
+    text-align: center;
+  }
 }

@@ -12,3 +12,17 @@
   line-height: 42px;
   text-align: center;
 }
+
+.footer {
+  font-family: 'Roboto Condensed', serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #CCCCCC;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 12px;
+  border-top: 1px solid #CCCCCC;
+  margin: 0 20px;
+}

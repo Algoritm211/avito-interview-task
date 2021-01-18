@@ -30,6 +30,7 @@ const ModalWindow: React.FC<PropsModal> = (props) => {
   const {id} = useParams<{ id: string | undefined }>()
   const history = useHistory()
   const backdrop = useRef<HTMLDivElement | null>(null);
+  const width = window.innerWidth
 
   useEffect(() => {
     if (id) {
@@ -66,6 +67,63 @@ const ModalWindow: React.FC<PropsModal> = (props) => {
   const commentBlock = comments?.map((comment) => {
     return <Comment comment={comment}/>
   })
+
+  if (width < 700) {
+    return (
+      <div className={classNames(classes.modalWindowContainer, {[classes.open]: id})}>
+        <div className={classes.modalWindow} ref={backdrop}>
+          <div className={classes.photoInputs}>
+            <div>
+              {photo && <img src={photo} alt={'largeIMG'} className={classes.imageModal}/>}
+            </div>
+            <div className={classes.commentBlock}>
+              {!comments?.length &&
+              <div>
+                Комментариев еще нет. Вы можете быть первым)
+              </div>
+              }
+              {commentBlock}
+            </div>
+            <div className={classes.commentFormBlock}>
+              <form onSubmit={formik.handleSubmit} className={classes.commentForm}>
+                <div>
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.firstName}
+                    className={classes.customInput}
+                    placeholder={'Ваше имя'}
+                  />
+                </div>
+                <div>
+                  <input
+                    id="comment"
+                    name="comment"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.comment}
+                    className={classes.customInput}
+                    placeholder={'Ваша фамилия'}
+                  />
+                </div>
+                <div>
+                  <button type={"submit"} className={classes.commentButton}>
+                    Оставить комментарий
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div className={classes.closeModal} onClick={onClose}>
+            <i className="fas fa-times"></i>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={classNames(classes.modalWindowContainer, {[classes.open]: id})}>
@@ -107,6 +165,11 @@ const ModalWindow: React.FC<PropsModal> = (props) => {
           </div>
         </div>
         <div className={classes.commentBlock}>
+          {!comments?.length &&
+          <div>
+            Комментариев еще нет. Вы можете быть первым)
+          </div>
+          }
           {commentBlock}
         </div>
         <div className={classes.closeModal} onClick={onClose}>
