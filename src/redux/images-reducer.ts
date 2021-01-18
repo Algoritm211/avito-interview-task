@@ -6,11 +6,13 @@ import {ImagesAPI} from "../api/images-api";
 const SET_IMAGES = 'frontend-interview-task/image-reducer/SET_IMAGES'
 const SET_IMAGE_DATA = 'frontend-interview-task/image-reducer/SET_IMAGE_DATA'
 const DELETE_IMAGE_DATA = 'frontend-interview-task/image-reducer/DELETE_IMAGE_DATA'
+const SET_IS_LOADING_DATA = 'frontend-interview-task/image-reducer/SET_IS_LOADING_DATA'
 
 
 const initialState = {
   images: [] as Array<ImageType>,
-  imgInfo: {} as PhotoDescriptionType
+  imgInfo: {} as PhotoDescriptionType,
+  isLoadingInfo: false
 }
 
 export const imagesReducer = (state = initialState, action: ActionTypes) => {
@@ -29,6 +31,11 @@ export const imagesReducer = (state = initialState, action: ActionTypes) => {
       return {
         ...state,
         imgInfo: {} as PhotoDescriptionType
+      }
+    case SET_IS_LOADING_DATA:
+      return {
+        ...state,
+        isLoadingInfo: action.isLoading
       }
     default:
       return state
@@ -55,6 +62,13 @@ export const actions = {
     return {
       type: DELETE_IMAGE_DATA,
     } as const
+  },
+
+  setLoadingInfo(isLoading: boolean) {
+    return {
+      type: SET_IS_LOADING_DATA,
+      isLoading: isLoading
+    } as const
   }
 }
 
@@ -66,12 +80,15 @@ export const loadImages = (): ThunkType => async (dispatch) => {
 
 
 export const loadImageInfo = (id: string): ThunkType => async (dispatch) => {
+  dispatch(actions.setLoadingInfo(true))
   const imgInfo = await ImagesAPI.getPhotoDescription(id)
+  dispatch(actions.setLoadingInfo(false))
   dispatch(actions.setImageData(imgInfo))
 }
 
 export const commentImage = (id: string): ThunkType => async (dispatch) => {
   const response = await ImagesAPI.commentImage(id)
+  console.log(response)
 }
 
 type ActionTypes = InferActionsType<typeof actions>

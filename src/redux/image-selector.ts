@@ -13,3 +13,7 @@ export const getComments = (state: AppStateType) => {
 export const getLargeImage = (state: AppStateType) => {
   return state.imagesReducer.imgInfo.url
 }
+
+export const getIsLoading = (state: AppStateType) => {
+  return state.imagesReducer.isLoadingInfo
+}

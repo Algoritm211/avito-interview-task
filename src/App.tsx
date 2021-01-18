@@ -2,7 +2,6 @@ import React from 'react';
 import {Redirect, Route, Switch } from 'react-router-dom';
 import classes from './App.module.css';
 import ImageScreen from "./components/ImageScreen/ImageScreen";
-import ModalWindow from "./components/ModalWindow/ModalWindow";
 
 function App() {
   return (

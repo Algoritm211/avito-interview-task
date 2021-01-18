@@ -1,5 +1,4 @@
 import {Action, applyMiddleware, combineReducers, createStore} from "redux";
-import {ImageType} from "../types/types";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk'
 import {imagesReducer} from "./images-reducer";
 

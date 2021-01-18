@@ -5,13 +5,12 @@ import {getImages} from "../../redux/image-selector";
 import {ImageElement} from "./ImagesElement/ImagesElement";
 import {loadImages} from '../../redux/images-reducer';
 import ModalWindow from "../ModalWindow/ModalWindow";
-import {useHistory, useParams } from 'react-router-dom';
-import {ImageType} from "../../types/types";
+import {useHistory} from 'react-router-dom';
 
 const ImageScreen: React.FC = () => {
 
   const [isOpenModalWindow, setIsOpenModalWindow] = useState(false)
-  
+
   let history = useHistory();
 
   const onOpenModal = (id: number) => {
@@ -27,7 +26,7 @@ const ImageScreen: React.FC = () => {
     dispatch(loadImages())
   }
 
-  useEffect (onLoadImages, [])
+  useEffect(onLoadImages, [dispatch])
 
   const imagesComponent = images.map((image) => {
     return (
@@ -36,10 +35,10 @@ const ImageScreen: React.FC = () => {
   })
 
   return (
-      <div className={classes.photoContainer}>
-        {imagesComponent}
-        {isOpenModalWindow && <ModalWindow setIsOpenModal={setIsOpenModalWindow} />}
-      </div>
+    <div className={classes.photoContainer}>
+      {imagesComponent}
+      {isOpenModalWindow && <ModalWindow setIsOpenModal={setIsOpenModalWindow}/>}
+    </div>
   )
 }
 export default ImageScreen
