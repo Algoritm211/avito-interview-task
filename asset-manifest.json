@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/avito-interview-task/static/css/main.bcee4569.chunk.css",
+    "main.css": "/avito-interview-task/static/css/main.6a2129a1.chunk.css",
     "main.js": "/avito-interview-task/static/js/main.3f0795f0.chunk.js",
     "main.js.map": "/avito-interview-task/static/js/main.3f0795f0.chunk.js.map",
     "runtime-main.js": "/avito-interview-task/static/js/runtime-main.57a53cc2.js",
@@ -10,13 +10,13 @@
     "static/js/3.c6f244d7.chunk.js": "/avito-interview-task/static/js/3.c6f244d7.chunk.js",
     "static/js/3.c6f244d7.chunk.js.map": "/avito-interview-task/static/js/3.c6f244d7.chunk.js.map",
     "index.html": "/avito-interview-task/index.html",
-    "static/css/main.bcee4569.chunk.css.map": "/avito-interview-task/static/css/main.bcee4569.chunk.css.map",
+    "static/css/main.6a2129a1.chunk.css.map": "/avito-interview-task/static/css/main.6a2129a1.chunk.css.map",
     "static/js/2.d35a2a83.chunk.js.LICENSE.txt": "/avito-interview-task/static/js/2.d35a2a83.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.57a53cc2.js",
     "static/js/2.d35a2a83.chunk.js",
-    "static/css/main.bcee4569.chunk.css",
+    "static/css/main.6a2129a1.chunk.css",
     "static/js/main.3f0795f0.chunk.js"
   ]
 }
