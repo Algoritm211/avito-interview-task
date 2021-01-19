@@ -9,6 +9,8 @@ type Props = {
 export const ImageElement: React.FC<Props> = (props) => {
 
   return (
-    <img src={props.imageUrl} alt={'GalleryPhoto'} className={classes.image} onClick={props.onOpenModal}/>
+    <React.Fragment>
+      <img src={props.imageUrl} alt={'GalleryPhoto'} className={classes.image} onClick={props.onOpenModal}/>
+    </React.Fragment>
   )
 }

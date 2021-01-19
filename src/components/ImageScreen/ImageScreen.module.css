@@ -3,9 +3,13 @@
 
 @media (min-width: 700px) {
   .photoContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .desktopContainer {
+    min-height: 750px;
   }
 }
 
@@ -16,6 +20,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 750px;
   }
 }
+
 
