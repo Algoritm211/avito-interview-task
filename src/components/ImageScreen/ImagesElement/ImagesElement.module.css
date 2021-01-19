@@ -2,11 +2,14 @@
 
 @media (min-width: 700px) {
   .image {
+    display: block;
     width: 229px;
     height: 142px;
-    margin: 15px 10px;
+    margin: 15px auto;
     cursor: pointer;
+    text-align: center;
   }
+
 }
 
 @media (min-width: 320px) and (max-width: 700px) {

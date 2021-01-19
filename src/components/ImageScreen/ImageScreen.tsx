@@ -35,9 +35,11 @@ const ImageScreen: React.FC = () => {
   })
 
   return (
-    <div className={classes.photoContainer}>
-      {imagesComponent}
-      {isOpenModalWindow && <ModalWindow setIsOpenModal={setIsOpenModalWindow}/>}
+    <div className={classes.desktopContainer}>
+      <div className={classes.photoContainer}>
+        {imagesComponent}
+        {isOpenModalWindow && <ModalWindow setIsOpenModal={setIsOpenModalWindow}/>}
+      </div>
     </div>
   )
 }
